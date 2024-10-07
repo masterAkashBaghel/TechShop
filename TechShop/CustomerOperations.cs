@@ -1,23 +1,23 @@
 using System;
 using TechShop.Entities.Model;
-using TechShop.Services.DAO;
+using TechShop.Services.dao.Services;
 
-namespace TechShopApp.Operations
+namespace TechShop
 {
     public static class CustomerOperations
     {
         public static void AddCustomer(CustomerService customerService)
         {
             Console.Write("Enter First Name: ");
-            string firstName = Console.ReadLine();
+            string firstName = Console.ReadLine() ?? string.Empty;
             Console.Write("Enter Last Name: ");
-            string lastName = Console.ReadLine();
+            string lastName = Console.ReadLine() ?? string.Empty;
             Console.Write("Enter Email: ");
-            string email = Console.ReadLine();
+            string email = Console.ReadLine() ?? string.Empty;
             Console.Write("Enter Phone Number: ");
-            string phoneNumber = Console.ReadLine();
+            string phoneNumber = Console.ReadLine() ?? string.Empty;
 
-            Customer customer = new Customer
+            Customer customer = new()
             {
                 FirstName = firstName,
                 LastName = lastName,
@@ -33,8 +33,8 @@ namespace TechShopApp.Operations
         public static void GetCustomerDetails(CustomerService customerService)
         {
             Console.Write("Enter Customer ID: ");
-            int customerId = int.Parse(Console.ReadLine());
-            Customer customer = customerService.GetCustomerDetails(customerId);
+            int customerId = int.Parse(Console.ReadLine() ?? string.Empty);
+            Customer customer = customerService.GetCustomerById(customerId);
             if (customer != null)
             {
                 Console.WriteLine($"First Name: {customer.FirstName}");
@@ -51,20 +51,20 @@ namespace TechShopApp.Operations
         public static void UpdateCustomerInfo(CustomerService customerService)
         {
             Console.Write("Enter Customer ID: ");
-            int customerId = int.Parse(Console.ReadLine());
-            Customer customer = customerService.GetCustomerDetails(customerId);
+            int customerId = int.Parse(Console.ReadLine() ?? string.Empty);
+            Customer customer = customerService.GetCustomerById(customerId);
             if (customer != null)
             {
                 Console.Write("Enter New First Name: ");
-                customer.FirstName = Console.ReadLine();
+                customer.FirstName = Console.ReadLine() ?? string.Empty;
                 Console.Write("Enter New Last Name: ");
-                customer.LastName = Console.ReadLine();
+                customer.LastName = Console.ReadLine() ?? string.Empty;
                 Console.Write("Enter New Email: ");
-                customer.Email = Console.ReadLine();
+                customer.Email = Console.ReadLine() ?? string.Empty;
                 Console.Write("Enter New Phone Number: ");
-                customer.Phone = Console.ReadLine();
+                customer.Phone = Console.ReadLine() ?? string.Empty;
 
-                customerService.UpdateCustomerInfo(customer);
+                customerService.UpdateCustomer(customer);
                 Console.WriteLine("Customer updated successfully.");
             }
             else

@@ -1,44 +1,30 @@
 using TechShop.Entities.Model;
-using System.Collections.Generic;
-using System.Linq;
+using TechShop.Services.dao.Reository;
 
-namespace TechShop.Services.DAO
+namespace TechShop.Services.dao.Services
 {
-    public class ProductService : IProducts
+    public class ProductService(IProductRepository productRepository) : IProductRepository
     {
-        private List<Product> products;
-
-        public ProductService()
-        {
-            products = new List<Product>();
-        }
+        private readonly IProductRepository _productRepository = productRepository;
 
         public void AddProduct(Product product)
         {
-            products.Add(product);
+            _productRepository.AddProduct(product);
         }
 
         public Product GetProductDetails(int productID)
         {
-            return products.FirstOrDefault(p => p.ProductID == productID);
+            return _productRepository.GetProductDetails(productID);
         }
 
         public void UpdateProductInfo(Product product)
         {
-            var existingProduct = products.FirstOrDefault(p => p.ProductID == product.ProductID);
-            if (existingProduct == null)
-                throw new ArgumentException("Product not found.");
-
-            existingProduct.ProductName = product.ProductName;
-            existingProduct.Price = product.Price;
-            existingProduct.Category = product.Category;
-            existingProduct.Description = product.Description;
+            _productRepository.UpdateProductInfo(product);
         }
 
         public bool IsProductInStock(int productID)
         {
-            var product = products.FirstOrDefault(p => p.ProductID == productID);
-            return product != null && product.Inventory.QuantityInStock > 0;
+            return _productRepository.IsProductInStock(productID);
         }
     }
 }

@@ -1,22 +1,21 @@
 using System;
-using System.Collections.Generic;
 using TechShop.Entities.Model;
-using TechShop.Services.DAO;
+using TechShop.Services.dao.Services;
 
-namespace TechShopApp.Operations
+namespace TechShop
 {
     public static class OrderOperations
     {
         public static void PlaceOrder(OrderService orderService)
         {
             Console.Write("Enter Customer Name: ");
-            string customerName = Console.ReadLine();
+            string customerName = Console.ReadLine() ?? string.Empty;
             Console.Write("Enter Order Date (yyyy-mm-dd): ");
-            DateTime orderDate = DateTime.Parse(Console.ReadLine());
+            DateTime orderDate = DateTime.Parse(Console.ReadLine() ?? string.Empty);
             Console.Write("Enter Total Amount: ");
-            decimal totalAmount = decimal.Parse(Console.ReadLine());
+            decimal totalAmount = decimal.Parse(Console.ReadLine() ?? string.Empty);
 
-            Order order = new Order
+            Order order = new()
             {
                 Customer = new Customer { FirstName = customerName },
                 OrderDate = orderDate,
@@ -30,7 +29,7 @@ namespace TechShopApp.Operations
         public static void GetOrderDetails(OrderService orderService)
         {
             Console.Write("Enter Order ID: ");
-            int orderId = int.Parse(Console.ReadLine());
+            int orderId = int.Parse(Console.ReadLine() ?? string.Empty);
             Order order = orderService.GetOrder(orderId);
             if (order != null)
             {
@@ -47,16 +46,16 @@ namespace TechShopApp.Operations
         public static void UpdateOrder(OrderService orderService)
         {
             Console.Write("Enter Order ID: ");
-            int orderId = int.Parse(Console.ReadLine());
+            int orderId = int.Parse(Console.ReadLine() ?? string.Empty);
             Order order = orderService.GetOrder(orderId);
             if (order != null)
             {
                 Console.Write("Enter New Customer Name: ");
-                order.Customer.FirstName = Console.ReadLine();
+                order.Customer.FirstName = Console.ReadLine() ?? string.Empty;
                 Console.Write("Enter New Order Date (yyyy-mm-dd): ");
-                order.OrderDate = DateTime.Parse(Console.ReadLine());
+                order.OrderDate = DateTime.Parse(Console.ReadLine() ?? string.Empty);
                 Console.Write("Enter New Total Amount: ");
-                order.TotalAmount = decimal.Parse(Console.ReadLine());
+                order.TotalAmount = decimal.Parse(Console.ReadLine() ?? string.Empty);
 
                 orderService.UpdateOrder(order);
                 Console.WriteLine("Order updated successfully.");
@@ -70,7 +69,7 @@ namespace TechShopApp.Operations
         public static void CancelOrder(OrderService orderService)
         {
             Console.Write("Enter Order ID: ");
-            int orderId = int.Parse(Console.ReadLine());
+            int orderId = int.Parse(Console.ReadLine() ?? string.Empty);
             orderService.CancelOrder(orderId);
             Console.WriteLine("Order canceled successfully.");
         }

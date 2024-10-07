@@ -1,17 +1,17 @@
 using System;
 using TechShop.Entities.Model;
-using TechShop.Services.DAO;
+using TechShop.Services.dao.Services;
 
-namespace TechShopApp.Operations
+namespace TechShop
 {
     public static class InventoryOperations
     {
         public static void AddToInventory(InventoryService inventoryService)
         {
             Console.Write("Enter Product ID: ");
-            int productId = int.Parse(Console.ReadLine());
+            int productId = int.Parse(Console.ReadLine() ?? string.Empty);
             Console.Write("Enter Quantity to Add: ");
-            int quantity = int.Parse(Console.ReadLine());
+            int quantity = int.Parse(Console.ReadLine() ?? string.Empty);
 
             Product product = inventoryService.GetProduct(productId);
             if (product != null)
@@ -28,7 +28,7 @@ namespace TechShopApp.Operations
         public static void RemoveFromInventory(InventoryService inventoryService)
         {
             Console.Write("Enter Product ID: ");
-            int productId = int.Parse(Console.ReadLine());
+            int productId = int.Parse(Console.ReadLine() ?? string.Empty);
 
             Product product = inventoryService.GetProduct(productId);
             if (product != null)
@@ -45,9 +45,9 @@ namespace TechShopApp.Operations
         public static void UpdateInventoryQuantity(InventoryService inventoryService)
         {
             Console.Write("Enter Product ID: ");
-            int productId = int.Parse(Console.ReadLine());
+            int productId = int.Parse(Console.ReadLine() ?? string.Empty);
             Console.Write("Enter New Quantity: ");
-            int newQuantity = int.Parse(Console.ReadLine());
+            int newQuantity = int.Parse(Console.ReadLine() ?? string.Empty);
 
             Product product = inventoryService.GetProduct(productId);
             if (product != null)
@@ -64,9 +64,9 @@ namespace TechShopApp.Operations
         public static void CheckProductAvailability(InventoryService inventoryService)
         {
             Console.Write("Enter Product ID: ");
-            int productId = int.Parse(Console.ReadLine());
+            int productId = int.Parse(Console.ReadLine() ?? string.Empty);
             Console.Write("Enter Quantity to Check: ");
-            int quantityToCheck = int.Parse(Console.ReadLine());
+            int quantityToCheck = int.Parse(Console.ReadLine() ?? string.Empty);
 
             Product product = inventoryService.GetProduct(productId);
             if (product != null)

@@ -1,45 +1,31 @@
 using TechShop.Entities.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using TechShop.Services.dao.Reository;
 
-namespace TechShop.Services.DAO
+
+namespace TechShop.Services.dao.Services
 {
-    public class CustomerService : ICustomerService
+    public class CustomerService(ICustomerRepository customerRepository) : ICustomerRepository
     {
-        private List<Customer> customers;
-
-        public CustomerService()
-        {
-            customers = new List<Customer>();
-        }
+        private readonly ICustomerRepository _customerRepository = customerRepository;
 
         public void AddCustomer(Customer customer)
         {
-            customers.Add(customer);
+            _customerRepository.AddCustomer(customer);
         }
 
-        public int CalculateTotalOrders(Customer customer)
+        public void UpdateCustomer(Customer customer)
         {
-            return customer.Orders.Count;
+            _customerRepository.UpdateCustomer(customer);
         }
 
-        public Customer GetCustomerDetails(int customerID)
+        public Customer GetCustomerById(int id)
         {
-            return customers.FirstOrDefault(c => c.CustomerID == customerID);
+            return _customerRepository.GetCustomerById(id);
         }
 
-        public void UpdateCustomerInfo(Customer customer)
+        public decimal CalculateTotalOrders(int customerId)
         {
-            var existingCustomer = customers.FirstOrDefault(c => c.CustomerID == customer.CustomerID);
-            if (existingCustomer == null)
-                throw new ArgumentException("Customer not found.");
-
-            existingCustomer.FirstName = customer.FirstName;
-            existingCustomer.LastName = customer.LastName;
-            existingCustomer.Email = customer.Email;
-            existingCustomer.Phone = customer.Phone;
-            existingCustomer.Address = customer.Address;
+            return _customerRepository.CalculateTotalOrders(customerId);
         }
     }
 }

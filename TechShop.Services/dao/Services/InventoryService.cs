@@ -1,66 +1,55 @@
 using TechShop.Entities.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using TechShop.Services.dao.Reository;
 
-namespace TechShop.Services.DAO
+namespace TechShop.Services.dao.Services
 {
-    public class InventoryService : IInventoryService
+    public class InventoryService(IInventoryRepository inventoryRepository) : IInventoryRepository
     {
+        private readonly IInventoryRepository _inventoryRepository = inventoryRepository;
 
-        private List<Product> products;
-        public InventoryService()
-        {
-            products = new List<Product>();
-        }
         public void AddToInventory(Product product)
         {
-            products.Add(product);
+            _inventoryRepository.AddToInventory(product);
         }
+
         public void RemoveFromInventory(Product product)
         {
-            products.Remove(product);
+            _inventoryRepository.RemoveFromInventory(product);
         }
+
         public void UpdateStockQuantity(Product product, int newQuantity)
         {
-            var existingProduct = products.FirstOrDefault(p => p.ProductID == product.ProductID);
-            if (existingProduct == null)
-                throw new ArgumentException("Product not found.");
-
-            existingProduct.QuantityInStock = newQuantity;
+            _inventoryRepository.UpdateStockQuantity(product, newQuantity);
         }
+
         public bool IsProductAvailable(Product product, int quantityToCheck)
         {
-            var existingProduct = products.FirstOrDefault(p => p.ProductID == product.ProductID);
-            if (existingProduct == null)
-                throw new ArgumentException("Product not found.");
-
-            return existingProduct.QuantityInStock >= quantityToCheck;
+            return _inventoryRepository.IsProductAvailable(product, quantityToCheck);
         }
+
         public double GetInventoryValue()
         {
-            return (double)products.Sum(p => p.Price * p.QuantityInStock);
+            return _inventoryRepository.GetInventoryValue();
         }
+
         public List<Product> ListLowStockProducts(int threshold)
         {
-            return products.Where(p => p.QuantityInStock < threshold).ToList();
+            return _inventoryRepository.ListLowStockProducts(threshold);
         }
+
         public List<Product> ListOutOfStockProducts()
         {
-            return products.Where(p => p.QuantityInStock == 0).ToList();
+            return _inventoryRepository.ListOutOfStockProducts();
         }
+
         public Product GetProduct(int productID)
         {
-            return products.FirstOrDefault(p => p.ProductID == productID);
+            return _inventoryRepository.GetProduct(productID);
         }
+
         public int GetQuantityInStock(int productID)
         {
-            var product = products.FirstOrDefault(p => p.ProductID == productID);
-            if (product == null)
-                throw new ArgumentException("Product not found.");
-
-            return product.QuantityInStock;
+            return _inventoryRepository.GetQuantityInStock(productID);
         }
     }
-
 }

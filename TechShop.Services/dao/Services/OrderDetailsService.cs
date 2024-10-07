@@ -1,36 +1,30 @@
 using TechShop.Entities.Model;
-using System.Collections.Generic;
-using System.Linq;
+using TechShop.Services.dao.Reository;
 
-namespace TechShop.Services.DAO
+namespace TechShop.Services.dao.Services
 {
-    public class OrderDetailsService : IOrderDetailsService
+    public class OrderDetailsService(IOrderDetailsRepository orderDetailsRepository) : IOrderDetailsRepository
     {
-        private List<OrderDetail> orderDetails;
-
-        public OrderDetailsService()
-        {
-            orderDetails = new List<OrderDetail>();
-        }
+        private readonly IOrderDetailsRepository _orderDetailsRepository = orderDetailsRepository;
 
         public decimal CalculateTotalAmount(Order order)
         {
-            return order.OrderDetails.Sum(od => od.Product.Price * od.Quantity);
+            return _orderDetailsRepository.CalculateTotalAmount(order);
         }
 
         public OrderDetail GetOrderDetails(int orderDetailID)
         {
-            return orderDetails.FirstOrDefault(od => od.OrderDetailID == orderDetailID);
+            return _orderDetailsRepository.GetOrderDetails(orderDetailID);
         }
 
         public void UpdateOrderStatus(int orderID)
         {
-            Console.WriteLine("Order status updated.");
+            _orderDetailsRepository.UpdateOrderStatus(orderID);
         }
 
         public void CancelOrder(int orderID)
         {
-            Console.WriteLine("Order canceled.");
+            _orderDetailsRepository.CancelOrder(orderID);
         }
     }
 }

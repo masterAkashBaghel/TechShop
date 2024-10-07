@@ -1,9 +1,7 @@
 using TechShop.Entities.Model;
-using System.Collections.Generic;
-
-namespace TechShop.Services.DAO
+namespace TechShop.Services.dao.Reository
 {
-    public interface IInventoryService
+    public interface IInventoryRepository
     {
         void AddToInventory(Product product);
         void RemoveFromInventory(Product product);

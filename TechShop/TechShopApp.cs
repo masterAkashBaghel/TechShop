@@ -1,18 +1,26 @@
-﻿using System;
-using TechShop.Services.DAO;
-using TechShopApp.Operations;
+﻿using TechShop.Services.dao.Reository;
+using TechShop.Services.dao.Services;
 
-namespace TechShopApp
+
+namespace TechShop
 {
     class Program
     {
         static void Main(string[] args)
         {
-            ProductService productService = new ProductService();
-            OrderService orderService = new OrderService();
-            InventoryService inventoryService = new InventoryService();
-            CustomerService customerService = new CustomerService();
-            OrderDetailsService orderDetailsService = new OrderDetailsService();
+            // Instantiate repository classes
+            IProductRepository productRepository = new ProductRepository();
+            IOrderRepository orderRepository = new OrderRepository();
+            IInventoryRepository inventoryRepository = new InventoryRepository();
+            ICustomerRepository customerRepository = new CustomerRepository();
+            IOrderDetailsRepository orderDetailsRepository = new OrderDetailsRepository();
+
+            // Pass repository instances to service class constructors
+            ProductService productService = new(productRepository);
+            OrderService orderService = new(orderRepository);
+            InventoryService inventoryService = new(inventoryRepository);
+            CustomerService customerService = new(customerRepository);
+            OrderDetailsService orderDetailsService = new(orderDetailsRepository);
 
             while (true)
             {
@@ -37,7 +45,7 @@ namespace TechShopApp
                 Console.WriteLine("18. Remove Order Detail");
                 Console.WriteLine("0. Exit");
                 Console.Write("Select an option: ");
-                string option = Console.ReadLine();
+                string option = Console.ReadLine() ?? string.Empty;
 
                 switch (option)
                 {

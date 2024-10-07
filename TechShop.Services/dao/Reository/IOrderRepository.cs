@@ -1,8 +1,8 @@
 using TechShop.Entities.Model;
 
-namespace TechShop.Services.DAO
+namespace TechShop.Services.dao.Reository
 {
-    public interface IOrderService
+    public interface IOrderRepository
     {
         void PlaceOrder(Order order);
         Order GetOrder(int orderId);

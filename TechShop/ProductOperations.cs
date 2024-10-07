@@ -1,25 +1,25 @@
 using System;
 using TechShop.Entities.Model;
-using TechShop.Services.DAO;
+using TechShop.Services.dao.Services;
 
-namespace TechShopApp.Operations
+namespace TechShop
 {
     public static class ProductOperations
     {
         public static void AddProduct(ProductService productService)
         {
             Console.Write("Enter Product Name: ");
-            string name = Console.ReadLine();
+            string name = Console.ReadLine() ?? string.Empty;
             Console.Write("Enter Description: ");
-            string description = Console.ReadLine();
+            string description = Console.ReadLine() ?? string.Empty;
             Console.Write("Enter Price: ");
-            decimal price = decimal.Parse(Console.ReadLine());
+            decimal price = decimal.Parse(Console.ReadLine() ?? string.Empty);
             Console.Write("Enter Category: ");
-            string category = Console.ReadLine();
+            string category = Console.ReadLine() ?? string.Empty;
             Console.Write("Enter Quantity in Stock: ");
-            int quantity = int.Parse(Console.ReadLine());
+            int quantity = int.Parse(Console.ReadLine() ?? string.Empty);
 
-            Product product = new Product
+            Product product = new()
             {
                 ProductName = name,
                 Description = description,
@@ -35,7 +35,7 @@ namespace TechShopApp.Operations
         public static void GetProductDetails(ProductService productService)
         {
             Console.Write("Enter Product ID: ");
-            int productId = int.Parse(Console.ReadLine());
+            int productId = int.Parse(Console.ReadLine() ?? string.Empty);
             Product product = productService.GetProductDetails(productId);
             if (product != null)
             {
@@ -54,20 +54,20 @@ namespace TechShopApp.Operations
         public static void UpdateProductInfo(ProductService productService)
         {
             Console.Write("Enter Product ID: ");
-            int productId = int.Parse(Console.ReadLine());
+            int productId = int.Parse(Console.ReadLine() ?? string.Empty);
             Product product = productService.GetProductDetails(productId);
             if (product != null)
             {
                 Console.Write("Enter New Product Name: ");
-                product.ProductName = Console.ReadLine();
+                product.ProductName = Console.ReadLine() ?? string.Empty;
                 Console.Write("Enter New Description: ");
-                product.Description = Console.ReadLine();
+                product.Description = Console.ReadLine() ?? string.Empty;
                 Console.Write("Enter New Price: ");
-                product.Price = decimal.Parse(Console.ReadLine());
+                product.Price = decimal.Parse(Console.ReadLine() ?? string.Empty);
                 Console.Write("Enter New Category: ");
-                product.Category = Console.ReadLine();
+                product.Category = Console.ReadLine() ?? string.Empty;
                 Console.Write("Enter New Quantity in Stock: ");
-                product.Inventory.QuantityInStock = int.Parse(Console.ReadLine());
+                product.Inventory.QuantityInStock = int.Parse(Console.ReadLine() ?? string.Empty);
 
                 productService.UpdateProductInfo(product);
                 Console.WriteLine("Product updated successfully.");
@@ -81,7 +81,7 @@ namespace TechShopApp.Operations
         public static void CheckProductStock(ProductService productService)
         {
             Console.Write("Enter Product ID: ");
-            int productId = int.Parse(Console.ReadLine());
+            int productId = int.Parse(Console.ReadLine() ?? string.Empty);
             bool inStock = productService.IsProductInStock(productId);
             Console.WriteLine(inStock ? "Product is in stock." : "Product is out of stock.");
         }

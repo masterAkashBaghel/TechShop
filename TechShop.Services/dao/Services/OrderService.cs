@@ -1,51 +1,40 @@
 using TechShop.Entities.Model;
-using System.Collections.Generic;
-using System.Linq;
+using TechShop.Services.dao.Reository;
 
-namespace TechShop.Services.DAO
+namespace TechShop.Services.dao.Services
 {
-    public class OrderService : IOrderService
+    public class OrderService : IOrderRepository
     {
-        private List<Order> orders;
+        private readonly IOrderRepository _orderRepository;
 
-        public OrderService()
+        public OrderService(IOrderRepository orderRepository)
         {
-            orders = new List<Order>();
+            _orderRepository = orderRepository;
         }
 
         public void PlaceOrder(Order order)
         {
-            orders.Add(order);
+            _orderRepository.PlaceOrder(order);
         }
 
         public Order GetOrder(int orderId)
         {
-            return orders.FirstOrDefault(o => o.OrderID == orderId);
+            return _orderRepository.GetOrder(orderId);
         }
 
         public void UpdateOrder(Order order)
         {
-            var existingOrder = GetOrder(order.OrderID);
-            if (existingOrder != null)
-            {
-                existingOrder.Customer = order.Customer;
-                existingOrder.OrderDate = order.OrderDate;
-                existingOrder.TotalAmount = order.TotalAmount;
-            }
+            _orderRepository.UpdateOrder(order);
         }
 
         public void CancelOrder(int orderId)
         {
-            var order = GetOrder(orderId);
-            if (order != null)
-            {
-                orders.Remove(order);
-            }
+            _orderRepository.CancelOrder(orderId);
         }
 
         public List<Order> GetAllOrders()
         {
-            return orders;
+            return _orderRepository.GetAllOrders();
         }
     }
 }

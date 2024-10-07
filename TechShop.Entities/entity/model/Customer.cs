@@ -59,9 +59,6 @@ namespace TechShop.Entities.Model
             set => _orders = value ?? throw new ArgumentNullException(nameof(Orders));
         }
 
-        public Customer()
-        {
-            _orders = new List<Order>();
-        }
+
     }
 }

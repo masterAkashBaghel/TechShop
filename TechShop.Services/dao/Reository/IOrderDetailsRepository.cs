@@ -1,9 +1,9 @@
 using TechShop.Entities.Model;
 using System.Collections.Generic;
 
-namespace TechShop.Services.DAO
+namespace TechShop.Services.dao.Reository
 {
-    public interface IOrderDetailsService
+    public interface IOrderDetailsRepository
     {
         decimal CalculateTotalAmount(Order order);
         OrderDetail GetOrderDetails(int orderDetailID);
