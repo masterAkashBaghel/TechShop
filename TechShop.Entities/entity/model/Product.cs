@@ -7,9 +7,8 @@ namespace TechShop.Entities.Model
         private string? _description;
         private decimal _price;
         private bool _inStock;
-        public string Category { get; set; } // Add this property
-        public Inventory Inventory { get; set; } // Add this property
-
+        public string Category { get; set; }
+        public Inventory Inventory { get; set; }
         public int ProductID
         {
             get => _productID;

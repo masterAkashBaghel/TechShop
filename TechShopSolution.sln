@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechShop", "TechShop\TechSh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechShop.Services", "TechShop.Services\TechShop.Services.csproj", "{F099B7DC-C276-42E2-9762-BF4CD4595954}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechShop.Helpers", "TechShop.Helpers\TechShop.Helpers.csproj", "{6A773E49-BAEA-467D-9CA8-74D4C54BDA79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechShop.Exceptions", "TechShop.Exceptions\TechShop.Exceptions.csproj", "{F3C146DD-40C6-4790-B884-0ED65650C0E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,13 @@ Global
 		{F099B7DC-C276-42E2-9762-BF4CD4595954}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F099B7DC-C276-42E2-9762-BF4CD4595954}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F099B7DC-C276-42E2-9762-BF4CD4595954}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A773E49-BAEA-467D-9CA8-74D4C54BDA79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A773E49-BAEA-467D-9CA8-74D4C54BDA79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A773E49-BAEA-467D-9CA8-74D4C54BDA79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A773E49-BAEA-467D-9CA8-74D4C54BDA79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3C146DD-40C6-4790-B884-0ED65650C0E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3C146DD-40C6-4790-B884-0ED65650C0E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3C146DD-40C6-4790-B884-0ED65650C0E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3C146DD-40C6-4790-B884-0ED65650C0E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

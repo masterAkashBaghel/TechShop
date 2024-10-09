@@ -10,16 +10,25 @@ namespace TechShop
         {
             Console.Write("Enter Customer Name: ");
             string customerName = Console.ReadLine() ?? string.Empty;
+            Console.Write("Enter  customer id :");
+            int customerId = int.Parse(Console.ReadLine() ?? string.Empty);
             Console.Write("Enter Order Date (yyyy-mm-dd): ");
             DateTime orderDate = DateTime.Parse(Console.ReadLine() ?? string.Empty);
             Console.Write("Enter Total Amount: ");
             decimal totalAmount = decimal.Parse(Console.ReadLine() ?? string.Empty);
+            Console.Write("Enter status : ");
+            string status = Console.ReadLine() ?? string.Empty;
+
+
 
             Order order = new()
             {
                 Customer = new Customer { FirstName = customerName },
+                CustomerID = customerId,
                 OrderDate = orderDate,
-                TotalAmount = totalAmount
+                TotalAmount = totalAmount,
+                Status = status
+
             };
 
             orderService.PlaceOrder(order);

@@ -46,5 +46,9 @@ namespace TechShop.Entities.Model
             }
         }
 
+        public object CustomerID { get; set; }
+        public string Status { get; set; }
+
+
     }
 }

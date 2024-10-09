@@ -1,4 +1,5 @@
 using System;
+using System.Data.Common;
 using TechShop.Entities.Model;
 using TechShop.Services.dao.Services;
 
@@ -8,6 +9,9 @@ namespace TechShop
     {
         public static void AddCustomer(CustomerService customerService)
         {
+            Console.WriteLine("Enter Customer Details:");
+            Console.Write("Enter Id : ");
+            int id = int.Parse(Console.ReadLine() ?? string.Empty);
             Console.Write("Enter First Name: ");
             string firstName = Console.ReadLine() ?? string.Empty;
             Console.Write("Enter Last Name: ");
@@ -19,6 +23,7 @@ namespace TechShop
 
             Customer customer = new()
             {
+                CustomerID = id,
                 FirstName = firstName,
                 LastName = lastName,
                 Email = email,

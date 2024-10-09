@@ -1,19 +1,21 @@
 ﻿using TechShop.Services.dao.Reository;
 using TechShop.Services.dao.Services;
-
-
+using TechShop.Helpers;
 namespace TechShop
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // Instantiate repository classes
-            IProductRepository productRepository = new ProductRepository();
-            IOrderRepository orderRepository = new OrderRepository();
-            IInventoryRepository inventoryRepository = new InventoryRepository();
-            ICustomerRepository customerRepository = new CustomerRepository();
-            IOrderDetailsRepository orderDetailsRepository = new OrderDetailsRepository();
+            // Read the connection string from the configuration file
+            string connectionString = ConfigurationHelper.GetConnectionString("TechShopDB");
+
+            // Instantiate repository classes with the connection string
+            IProductRepository productRepository = new ProductRepository(connectionString);
+            IOrderRepository orderRepository = new OrderRepository(connectionString);
+            IInventoryRepository inventoryRepository = new InventoryRepository(connectionString);
+            ICustomerRepository customerRepository = new CustomerRepository(connectionString);
+            IOrderDetailsRepository orderDetailsRepository = new OrderDetailsRepository(connectionString);
 
             // Pass repository instances to service class constructors
             ProductService productService = new(productRepository);
